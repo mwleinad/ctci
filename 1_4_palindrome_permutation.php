@@ -40,3 +40,11 @@ foreach($arrayOfLetters as $key => $letter) {
 }
 
 echo $isPalindrome;
+
+//Note: do not assume we have to create all the permutations, creating permutations is !n time (even for a 5 letter word is
+//5*4*3*2*1 = 120 permutations)
+//What we have to do here is just count the number of letters. If we do permutations on a string with 3 letters
+//we only have to count that each letter appears an even number, so abab, a appears twice and b appear twice too,
+//this means a permutation will sooner or later produce a palindrome. (ei abba)
+//for odd number of character strings (ie 5 letters) all the letters must appear an even number of times except one "orphan"
+//letter for instance ababt, will eventually produce abtba
