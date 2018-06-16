@@ -19,6 +19,8 @@ class StringProperties {
         $this->count++;
     }
 }
+
+//TODO make it work with only one loop, no StringProperties object needed, just create the string on the run
 class StringCompressor {
     private $compressedArray = [];
 
@@ -27,11 +29,7 @@ class StringCompressor {
             $this->createOrUpdateCompressedArray($string, $ii);
         }
 
-        if($this->shouldReturnOriginalString($string)) {
-            return $string;
-        }
-
-        return $this->getCompressedString();
+        return $this->shouldReturnOriginalString($string) ? $string : $this->getCompressedString();
     }
 
     private function shouldReturnOriginalString($string) {
