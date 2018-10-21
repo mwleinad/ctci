@@ -10,10 +10,6 @@ class LinkedList {
      * @var null
      */
     public $head = null;
-    /**
-     * @var null
-     */
-    private $current = null;
 
     /**
      * LinkedList constructor.
@@ -34,10 +30,12 @@ class LinkedList {
     public function prepend($value) {
         $node = new LinkedListNode($value);
 
-        //First element in the list
+        //If head is null we know we are trying to insert the first element in the list
         if(!isset($this->head)) {
-            $this->head = $node;
+            $this->head = $node; //next for head is "null"
         } else {
+            //Remember when prepending values, all we have to do is "point" whatever is currently on the head to the
+            //next attribute
             $node->next = $this->head;
             $this->head = $node;
         }
@@ -47,14 +45,14 @@ class LinkedList {
      *
      */
     public function printIt() {
-        $this->current = $this->head;
-        while($this->current !== null) {
-            echo $this->current->value;
-            if($this->current->next) {
+        $current = $this->head;
+        while($current !== null) {
+            echo $current->value;
+            if($current->next) {
                 echo " -> ";
             }
 
-            $this->current = $this->current->next;
+            $current = $current->next;
         }
     }
 }

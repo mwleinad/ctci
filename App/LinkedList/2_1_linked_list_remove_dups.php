@@ -7,5 +7,4 @@ use App\LinkedList\LinkedList;
 
 $n = $argv[1];
 $linkedList = new LinkedList($n);
-
 $linkedList->printIt();
