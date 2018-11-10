@@ -41,6 +41,26 @@ class LinkedList {
         }
     }
 
+    public function append($value) {
+        $node = new LinkedListNode($value);
+
+        //Note: We could keep a pointer to "last" element and append action would be faster, but we are keeping it simple
+        //with the pointers.
+        //If head is null we know we are trying to insert the first element in the list
+        if(!isset($this->head)) {
+            $this->head = $node; //next for head is "null"
+        } else {
+            $current = $this->head;
+            while($current !== null) {
+                if($current->next === null) {
+                    $current->next = $node;
+                    break;
+                }
+                $current = $current->next;
+            }
+        }
+    }
+
     /**
      *
      */
@@ -52,6 +72,28 @@ class LinkedList {
                 echo " -> ";
             }
 
+            $current = $current->next;
+        }
+    }
+
+    public function removeDups() {
+        $current = $this->head;
+        $previous = null;
+
+        $dupArray = [];
+        while($current !== null) {
+
+            //Add value to our hash table
+            if(!isset($dupArray[$current->value])) {
+                $dupArray[$current->value] = true;
+            } else { //Value is duplicated
+                $previous->next = $current->next;
+                $current = $current->next;
+                continue;
+            }
+
+            //Here we know is not a duplicated value
+            $previous = $current;
             $current = $current->next;
         }
     }
