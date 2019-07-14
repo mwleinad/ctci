@@ -9,7 +9,7 @@ class LinkedList {
     /**
      * @var null
      */
-    public $head = null;
+    public $head = null; //This should always point to the first element in the LinkedList
 
     /**
      * LinkedList constructor.
