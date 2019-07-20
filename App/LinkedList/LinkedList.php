@@ -5,6 +5,10 @@ namespace App\LinkedList;
  * Class LinkedList
  * Implement a basic unsorted (with randomly generated values) single linked list of N elements
  */
+/**
+ * Class LinkedList
+ * @package App\LinkedList
+ */
 class LinkedList {
     /**
      * @var null
@@ -16,9 +20,20 @@ class LinkedList {
      * @param $elements
      * Build a unsorted linked list with random values
      */
-    public function __construct($elements) {
+    public function __construct($elements = 0) {
         for($ii = 0; $ii < $elements; $ii++) {
             $this->prepend(mt_rand(1, 9));
+        }
+    }
+
+
+    /**
+     * @param $elements
+     * Initializes a linked list with an array of values.
+     */
+    public function initialize($elements) {
+        foreach($elements as $element) {
+            $this->append($element);
         }
     }
 
@@ -41,6 +56,9 @@ class LinkedList {
         }
     }
 
+    /**
+     * @param $value
+     */
     public function append($value) {
         $node = new LinkedListNode($value);
 
@@ -76,6 +94,9 @@ class LinkedList {
         }
     }
 
+    /**
+     *
+     */
     public function removeDups() {
         $current = $this->head;
         $previous = null;
