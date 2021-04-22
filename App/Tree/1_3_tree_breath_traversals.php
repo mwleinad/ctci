@@ -14,59 +14,60 @@ use App\Tree\TreeNode;
 
 //InOrder/PreOrder and PostOrder are considered depth-first
 
-//InOrder is left first, then current, then right
-//This should print the sample tree in this order: 1, 2, 3, 4, 5, 6 7
-class InOrderTraversal {
-    public function traverse(TreeNode $node) : void {
-        if($node->left !== null) {
-            $this->traverse($node->left);
-        }
-        echo $node->value; echo " ";
-        if($node->right !== null) {
-            $this->traverse($node->right);
-        }
-    }
-}
-
-//PreOder is current node first, then traverse left and right
-//This should print the sample tree in this order: 3, 2, 1, 5, 4, 6, 7
-class PreOrderTraversal {
-    public function traverse(TreeNode $node) : void {
-        echo $node->value; echo " ";
-        if($node->left !== null) {
-            $this->traverse($node->left);
-        }
-
-        if($node->right !== null) {
-            $this->traverse($node->right);
-        }
-    }
-}
-
-//PostOrder is left and right first then current
-//This should print the sample tree in this order: 1, 2, 4, 7, 6, 5, 3
-class PostOrderTraversal {
-    public function traverse(TreeNode $node) : void {
-        if($node->left !== null) {
-            $this->traverse($node->left);
-        }
-
-        if($node->right !== null) {
-            $this->traverse($node->right);
-        }
-
-        echo $node->value; echo " ";
-    }
-}
-
 //Level order traversal is "Breadth-first". We should process the current node, then process all siblings then move to
 //the next level
 //This should print the sample tree in this order: 3, 2, 5, 1, 4, 6, 7
+
+/**
+ * Class LevelOrderTraversal
+ * Time Complexity: O(n^2) in worst case. Or
+ * Space complexity: O(n) worst case
+ */
 class LevelOrderTraversal {
-    public function traverse(TreeNode $node) {
-        echo $node->value; echo " ";
-        if($node->left !== null && $node->right !== null) {
-            
+    /**
+     * @param TreeNode $node
+     * @param int $height
+     */
+    public function traverse(TreeNode $node, int $height) {
+        //Print each level until height
+        for($currentLevel = 1; $currentLevel <= $height; $currentLevel++) {
+            $this->printLevel($node, $currentLevel);
+            //For each level let's just print a line break
+            echo "\n";
+        }
+    }
+
+
+    /**
+     * @param TreeNode|null $node
+     * @return int
+     * Still having some issues trying to understand how the recursion works here. Testing more tomorrow
+     */
+    public function height(?TreeNode $node) : int {
+        if($node === null) {
+            return 0;
+        } else {
+            //Compute height for each subtree
+            $leftHeight = $this->height($node->left);
+            $rightHeight = $this->height($node->right);
+
+            //Use the larger one
+            return $rightHeight > $leftHeight
+                ? $rightHeight + 1
+                : $leftHeight + 1;
+        }
+    }
+
+    private function printLevel(?TreeNode $node, $currentLevel) {
+        if($node === null) {
+            return;
+        }
+
+        if($currentLevel === 1) {
+            echo $node->value." ";
+        } else {
+            $this->printLevel($node->right, $currentLevel - 1);
+            $this->printLevel($node->left, $currentLevel - 1);
         }
     }
 }
@@ -75,20 +76,10 @@ class LevelOrderTraversal {
 $tree = new Tree();
 $tree->initializeSampleTree($tree);
 
-$inOrderTraversal = new InOrderTraversal();
-//Send the initial node (root)
-//$inOrderTraversal->traverse($tree->root);
-
-echo "\n";
-$preOrderTraversal = new PreOrderTraversal();
-//$preOrderTraversal->traverse($tree->root);
-
-echo "\n";
-$postOrderTraversal = new PostOrderTraversal();
-//$postOrderTraversal->traverse($tree->root);
-
-echo "\n";
 $levelOrderTraversal = new LevelOrderTraversal;
-$levelOrderTraversal->traverse($tree->root);
+$height = $levelOrderTraversal->height($tree->root);
+echo "Height: "; echo $levelOrderTraversal->height($tree->root);
+echo "\n";
+$levelOrderTraversal->traverse($tree->root, $height);
 
 

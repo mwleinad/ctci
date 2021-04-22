@@ -59,19 +59,6 @@ class PostOrderTraversal {
     }
 }
 
-//Level order traversal is "Breadth-first". We should process the current node, then process all siblings then move to
-//the next level
-//This should print the sample tree in this order: 3, 2, 5, 1, 4, 6, 7
-class LevelOrderTraversal {
-    public function traverse(TreeNode $node) {
-        echo $node->value; echo " ";
-        if($node->left !== null && $node->right !== null) {
-            
-        }
-    }
-}
-
-
 $tree = new Tree();
 $tree->initializeSampleTree($tree);
 

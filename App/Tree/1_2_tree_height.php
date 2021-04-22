@@ -1,15 +1,22 @@
 <?php
+//Calculate height of a binary tree
 require "vendor/autoload.php";
 use App\Tree\Tree;
 
 
 $tree = new Tree();
-$tree->insert(3);
-$tree->insert(2);
-$tree->insert(5);
-$tree->insert(1);
-$tree->insert(4);
-$tree->insert(6);
-$tree->insert(7);
+$tree->initializeSampleTree($tree);
 
-print_r($tree->root);
+class TreeHeight {
+
+    public function calculate(Tree $tree) {
+        return 1;
+    }
+
+}
+
+//print_r($tree->root);
+$treeHeight = new TreeHeight($tree);
+
+echo $treeHeight->calculate();
+

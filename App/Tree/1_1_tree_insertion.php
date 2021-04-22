@@ -2,7 +2,6 @@
 require "vendor/autoload.php";
 use App\Tree\Tree;
 
-
 $tree = new Tree();
 $tree->insert(3);
 $tree->insert(2);
